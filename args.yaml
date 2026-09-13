@@ -1,8 +1,8 @@
 task: detect
 mode: train
-model: yolov8n.pt
-data: data_hybrid.yaml
-epochs: 80
+model: /kaggle/working/runs/blindvision_hybrid_fixed/weights/last.pt
+data: coco8.yaml
+epochs: 100
 time: null
 patience: 100
 batch: 16
@@ -10,10 +10,10 @@ imgsz: 640
 save: true
 save_period: -1
 cache: false
-device: '0'
+device: ''
 workers: 8
-project: /kaggle/working/runs
-name: blindvision_hybrid_fixed
+project: null
+name: train
 exist_ok: false
 pretrained: true
 cls_remap: true
@@ -112,4 +112,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: /kaggle/working/runs/blindvision_hybrid_fixed
+save_dir: /kaggle/working/BlindVision/training/hybrid/runs/detect/train

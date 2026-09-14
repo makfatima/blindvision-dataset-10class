@@ -44,15 +44,15 @@ sources per your supervisor's "hybrid approach" — see
 `../../docs/HYBRID_DATA_DISCLOSURE.md` for manuscript wording that keeps
 this distinction clear.
 
-## Ready to train
+## Training run
 
-`data_hybrid.yaml`'s `nc: 10` now matches real data in every class. Run:
+This run has already been completed (100 epochs, YOLOv8s, seed 0) and its
+outputs are committed to this repository: `results.csv`, `args.yaml`,
+`best (1).pt`, `last.pt`. To reproduce from a fresh clone:
 ```
 python train_hybrid.py --data data_hybrid.yaml
 ```
 on a GPU (Colab, with `Runtime → Change runtime type → GPU`, works fine).
-Send back `results.csv`, `args.yaml`, and `best.pt` once it finishes and the
-real numbers can go into the manuscript.
 
 ## Filenames
 

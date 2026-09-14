@@ -2,7 +2,7 @@
 
 > **Scope of this repository:** This is a secondary hybrid-data transparency
 > release. It does **not** contain the original 5,600-image training dataset,
-> the primary trained weights, or the checkpoint used for the headline 96.3%
+> the primary trained weights, or the checkpoint used for the headline 92.2%
 > result reported in the manuscript. The dataset and checkpoint here (`best.pt`,
 > `last.pt`) come from a separate hybrid run assembled from public sources —
 > see [MANIFEST.md](MANIFEST.md) for per-class provenance and licensing.

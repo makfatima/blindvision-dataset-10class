@@ -1,0 +1,6 @@
+path: .
+train: images/train
+val: images/val
+
+nc: 10
+names: [person, door, chair, backpack, laptop, bottle, pole, vehicle, bicycle, stairs]

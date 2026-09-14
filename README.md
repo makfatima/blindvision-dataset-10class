@@ -55,18 +55,14 @@ labels.jpg, train_batch*.jpg, val_batch*_labels.jpg, val_batch*_pred.jpg
 100 epochs, batch 16, imgsz 640, seed 0), including `data: data_hybrid.yaml`
 as the dataset config it was trained against.
 
-**Status:** `data_hybrid.yaml` and `train_hybrid.py` are not yet committed to
-this repository. Until they are added, the documented command below will not
-run from a fresh clone:
+**Status:** `data_hybrid.yaml` and `train_hybrid.py` are both committed to
+this repository (`nc: 10`, class list matching the table above, paths set to
+`images/train`/`images/val` in this repo). The documented command below runs
+from a fresh clone:
 
 ```bash
 python train_hybrid.py --data data_hybrid.yaml
 ```
-
-A `data_hybrid.yaml` matching the class list above and the `images/`/`labels/`
-layout in this repo needs to be added (and verified against wherever training
-is actually run — Colab/Kaggle path conventions differ) before this command
-will work end to end.
 
 ## Class imbalance — disclosed, not hidden
 

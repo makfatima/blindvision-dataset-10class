@@ -5,7 +5,7 @@
 | Class id | Name | Source | License | Train boxes | Val boxes |
 |---|---|---|---|---|---|
 | 0 | person | COCO 2017 (via FiftyOne, 1200/150 img sample) | COCO terms of use | 3,939 | 506 |
-| 1 | door | DoorDetect-Dataset (GitHub) | none declared — cite paper, see `../data/door_subset/PROVENANCE.md` | 504 | 76 |
+| 1 | door | DoorDetect-Dataset (github.com/MiguelARD/DoorDetect-Dataset) | Redistribution permitted with citation — author's direct written permission, see [LICENSE.md](LICENSE.md) and [source Issue #4](https://github.com/MiguelARD/DoorDetect-Dataset/issues/4) | 504 | 76 |
 | 2 | chair | COCO 2017 | COCO terms of use | 630 | 118 |
 | 3 | backpack | COCO 2017 | COCO terms of use | 129 | 16 |
 | 4 | laptop | COCO 2017 | COCO terms of use | 81 | 9 |

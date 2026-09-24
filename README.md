@@ -1,72 +1,92 @@
 # BlindVision — Hybrid 10-Class Dataset & Training Artifacts
 
-> **Scope of this repository:** This is a secondary hybrid-data transparency
-> release. It does **not** contain the original 5,600-image training dataset,
-> the primary trained weights, or the checkpoint used for the headline 92.2%
-> result reported in the manuscript. The dataset and checkpoint here (`best.pt`,
-> `last.pt`) come from a separate hybrid run assembled from public sources —
-> see [MANIFEST.md](MANIFEST.md) for per-class provenance and licensing.
+> **Scope:** This repository is a reproducibility release for a **separate hybrid 10-class YOLOv8s training run**. It must not be treated as the source of every metric reported elsewhere in the BlindVision manuscript. The run uses 2,380 training images and 492 validation images assembled from public sources. See [MANIFEST.md](MANIFEST.md) for provenance, licensing, and class counts.
 
-## What's in this repo
+## Classes
 
-A 10-class YOLOv8 object-detection dataset and training run, assembled from
-three public sources (COCO 2017 via FiftyOne, DoorDetect-Dataset, and two
-Roboflow sets) to cover classes relevant to the BlindVision assistive-navigation
-project.
-
-| Class id | Name | Source |
-|---|---|---|
+| ID | Class | Source |
+|---:|---|---|
 | 0 | person | COCO 2017 |
 | 1 | door | DoorDetect-Dataset |
 | 2 | chair | COCO 2017 |
 | 3 | backpack | COCO 2017 |
 | 4 | laptop | COCO 2017 |
 | 5 | bottle | COCO 2017 |
-| 6 | pole | Roboflow "PoleDetection" |
-| 7 | vehicle | COCO 2017 (`car` class) |
+| 6 | pole | Roboflow PoleDetection |
+| 7 | vehicle | COCO 2017 (car) |
 | 8 | bicycle | COCO 2017 |
-| 9 | stairs | Roboflow "Stairs_Detection" |
+| 9 | stairs | Roboflow Stairs_Detection |
 
-Full per-class box counts, licensing terms, and the class-imbalance disclosure
-are in [MANIFEST.md](MANIFEST.md) — read that before citing or redistributing
-any subset.
+## Released artifacts
 
-## Repository contents
+The repository contains the dataset, training configuration, trained checkpoints, epoch-wise log, and Ultralytics evaluation/training plots.
 
-```
-images/train/   2,380 training images
-images/val/       492 validation images
-labels/train/   YOLO-format labels, 1:1 with images/train
-labels/val/     YOLO-format labels, 1:1 with images/val
-args.yaml       Training run configuration (task, model, hyperparameters)
-best (1).pt     Best checkpoint from this hybrid run
-last.pt         Final-epoch checkpoint
-results.csv     Per-epoch training/validation metrics
-results.png     Training curves (loss, mAP, precision, recall)
-confusion_matrix.png, confusion_matrix_normalized.png
-BoxP_curve.png, BoxR_curve.png, BoxF1_curve.png, BoxPR_curve.png
-labels.jpg, train_batch*.jpg, val_batch*_labels.jpg, val_batch*_pred.jpg
-    Ultralytics-generated training/validation visualizations
-```
+~~~text
+images/train/                 2,380 training images
+images/val/                     492 validation images
+labels/train/                 YOLO-format labels
+labels/val/                   YOLO-format labels
+data_hybrid.yaml              Dataset configuration
+train_hybrid.py               Reproduction script
+args.yaml                     Recorded Ultralytics training arguments
+best (1).pt                   Best checkpoint from this run
+last.pt                       Final-epoch checkpoint
+results.csv                   100-epoch training/validation log
+results.png                   Training curves
+confusion_matrix*.png         Confusion matrices
+Box*_curve.png                Precision/recall/F1/PR curves
+~~~
+
+The checkpoint filenames retain their original recorded names (`best (1).pt` and `last.pt`) so the released artifacts can be traced directly to the completed training run.
 
 ## Reproducing this run
 
-`args.yaml` records the exact configuration used (`model: yolov8s.pt`,
-100 epochs, batch 16, imgsz 640, seed 0), including `data: data_hybrid.yaml`
-as the dataset config it was trained against.
+The recorded run used:
+- Model: YOLOv8s pretrained checkpoint (`yolov8s.pt`)
+- Epochs: 100
+- Batch size: 16
+- Image size: 640
+- Seed: 0
+- Deterministic training: enabled
+- AMP: enabled
+- Workers: 8
+- Dataset configuration: `data_hybrid.yaml`
+- Training script: `train_hybrid.py`
 
-**Status:** `data_hybrid.yaml` and `train_hybrid.py` are both committed to
-this repository (`nc: 10`, class list matching the table above, paths set to
-`images/train`/`images/val` in this repo). The documented command below runs
-from a fresh clone:
+Re-run from a fresh clone on a compatible GPU:
 
-```bash
+~~~bash
 python train_hybrid.py --data data_hybrid.yaml
-```
+~~~
 
-## Class imbalance — disclosed, not hidden
+The complete recorded argument set is in [args.yaml](args.yaml). Because the original execution environment did not capture a complete lockfile, this repository **does not claim an exact package-level environment reproduction**. Do not infer exact Ultralytics/PyTorch versions unless they are independently recorded.
 
-`person` has roughly 40x more boxes than `laptop` or `bicycle`, mirroring
-COCO's natural frequency rather than a sampling bug. Expect materially lower
-precision/recall on the rarer classes (laptop, bicycle, backpack) than on
-person/pole/stairs — see MANIFEST.md for exact per-class train/val box counts.
+## Training result recorded in results.csv
+
+The committed `results.csv` is the authoritative epoch-wise record for this hybrid run. At epoch 100 it records approximately:
+- Precision: 67.63%
+- Recall: 48.40%
+- mAP@0.50: 50.23%
+- mAP@0.50:0.95: 33.24%
+
+These values describe this **hybrid YOLOv8s run only**. They must not be substituted for, or merged with, results from another training/evaluation experiment.
+
+## Reproducibility and provenance
+
+`MANIFEST.md` documents source datasets, class-level box counts, licenses, class imbalance, and the distinction between this hybrid release and the earlier/original dataset configuration.
+
+For a complete experiment audit, preserve together:
+1. The repository commit containing the dataset/configuration.
+2. `args.yaml`.
+3. `results.csv`.
+4. The released checkpoints.
+5. The generated evaluation plots.
+6. The exact manuscript/table that cites the experiment.
+
+## Class imbalance
+
+The dataset is intentionally documented as imbalanced. `person` has substantially more boxes than rare classes such as `laptop` and `bicycle`. Per-class metrics should therefore be reported when this run is used for analysis.
+
+## License and source attribution
+
+The merged dataset contains components with different source licenses and terms. Follow the source-specific terms documented in [MANIFEST.md](MANIFEST.md) and [LICENSE.md](LICENSE.md); do not describe the entire merged dataset as being covered by one blanket upstream license.

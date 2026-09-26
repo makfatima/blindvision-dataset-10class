@@ -39,10 +39,9 @@
 ## What this is NOT
 
 This is **not a reconstruction of the original 5,600-image training set**
-behind Tables III/V. It's a new, second dataset assembled from public
-sources per your supervisor's "hybrid approach" — see
-`../../docs/HYBRID_DATA_DISCLOSURE.md` for manuscript wording that keeps
-this distinction clear.
+behind the manuscript's primary results (Tables II and IV). It is a separate,
+secondary dataset assembled from public sources for an exploratory training
+run, reported on its own in the manuscript (Table II-A).
 
 ## Training run
 

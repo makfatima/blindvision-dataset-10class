@@ -87,6 +87,20 @@ For a complete experiment audit, preserve together:
 
 The dataset is intentionally documented as imbalanced. `person` has substantially more boxes than rare classes such as `laptop` and `bicycle`. Per-class metrics should therefore be reported when this run is used for analysis.
 
+## Citation
+
+The door subset is redistributed with the permission of the DoorDetect author, on condition of citation ([Issue #4](https://github.com/MiguelARD/DoorDetect-Dataset/issues/4)). If you use it, cite:
+
+~~~bibtex
+@article{Arduengo_2021,
+  title   = {Robust and adaptive door operation with a mobile robot},
+  author  = {Arduengo, Miguel and Torras, Carme and Sentis, Luis},
+  journal = {Intelligent Service Robotics},
+  year    = {2021},
+  doi     = {10.1007/s11370-021-00366-7}
+}
+~~~
+
 ## License and source attribution
 
 The merged dataset contains components with different source licenses and terms. Follow the source-specific terms documented in [MANIFEST.md](MANIFEST.md) and [LICENSE.md](LICENSE.md); do not describe the entire merged dataset as being covered by one blanket upstream license.
